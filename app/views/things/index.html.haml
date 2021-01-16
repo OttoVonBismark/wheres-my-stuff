@@ -1,0 +1,7 @@
+%h1 Here are some Things!
+
+- if things.count.zero?
+  %p There are no Things in the system... yet!
+- else
+  - things.each do |t|
+    = render partial: 'thing', locals: { thing: t }
