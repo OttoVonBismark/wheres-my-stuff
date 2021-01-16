@@ -1,0 +1,30 @@
+= form_with(model: thing, local: true) do |f|
+  = f.label :name, 'Package Name: '
+  = f.text_field :name
+  %br
+  
+  = f.label :description, 'Description: '
+  = f.text_area :description
+  %br
+
+  = f.label :ordered_on, 'Ordered on: '
+  = f.date_select :ordered_on, required: true
+  %br
+
+  = f.label :shipped_on, 'Shipped on: '
+  = f.date_select :shipped_on
+  %br
+
+  = f.label :tracking_number, 'Tracking number: '
+  = f.text_field :tracking_number
+  %br
+
+  = f.label :due_on, 'Package due on: '
+  = f.date_select :due_on
+  %br
+  
+  = f.label :arrived_on, 'Package arrived on: '
+  = f.date_select :arrived_on
+  %br
+
+  = f.submit button_text
