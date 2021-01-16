@@ -1,5 +1,9 @@
 %h1 Here are some Things!
 
+%p
+  Create some new
+  = link_to 'Things', new_thing_url
+
 - if things.count.zero?
   %p There are no Things in the system... yet!
 - else
