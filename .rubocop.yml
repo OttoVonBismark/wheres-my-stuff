@@ -1,0 +1,39 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  # I don't care about the things Rails generates.
+  Exclude:
+    - 'bin/*'
+    - 'db/**/**'
+    - 'node_modules/**/**'
+    - 'vendor/**/**'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/routes.rb'
+    - 'spec/**/*.rb'
+    - 'config/environments/**'
+
+# I don't care if config files are wordy
+Layout/LineLength:
+  Exclude:
+    - 'config/**/**'
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - 'app/**/**'
+
+Style/RedundantFetchBlock:
+  Exclude:
+    - 'config/puma.rb'
+
+# Routes can have whitespace for legibility.
+Layout/ExtraSpacing:
+  Exclude:
+    - 'config/routes.rb'
