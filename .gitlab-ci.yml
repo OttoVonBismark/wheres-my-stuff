@@ -1,0 +1,23 @@
+stages:
+  - build
+  - test
+  - cleanup
+
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+build:
+  stage: build
+  script:
+    - docker-compose build
+
+test:
+  stage: test
+  script:
+    - docker-compose run test
+
+cleanup:
+  stage: cleanup
+  script:
+    - docker system prune -af && docker volume prune -f
