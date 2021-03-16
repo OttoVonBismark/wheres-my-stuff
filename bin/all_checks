@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'fileutils'
+
+# path to your application root.
+APP_ROOT = File.expand_path('..', __dir__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+FileUtils.chdir APP_ROOT do
+  puts '== Running RSpec =='
+  system! 'bin/rspec'
+
+  puts "\n== Running Rubocop =="
+  system! 'bin/rubocop'
+
+  # puts "\n== Running Cypress Tests =="
+  # system! 'bin/rails cypress:run'
+end

@@ -36,7 +36,7 @@ services:
 ############################
   test: &test
     <<: *app
-    command: ["bundle", "exec", "rspec", "spec"]
+    command: ["./bin/all_checks"]
     networks:
       - wms-exposed
       - wms-backend
@@ -46,6 +46,14 @@ services:
       DATABASE_URL: "postgresql://wms_worker:derpass@postgres-test/wms"
     depends_on:
       - postgres-test
+
+  rubocop: &rubocop
+    <<: *test
+    command: ["bundle", "exec", "rubocop"]
+
+  rspec: &rspec
+    <<: *test
+    command: ["bundle", "exec", "rspec", "spec"]
 
   postgres-test:
     <<: *postgres

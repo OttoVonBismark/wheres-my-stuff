@@ -1,6 +1,6 @@
 stages:
   - build
-  - test
+  - tests
   - cleanup
 
 variables:
@@ -12,10 +12,15 @@ build:
   script:
     - docker-compose build
 
-test:
-  stage: test
+rubocop:
+  stage: tests
   script:
-    - docker-compose run test
+    - docker-compose run rubocop
+
+rspec:
+  stage: tests
+  script:
+    - docker-compose run rspec
 
 cleanup:
   stage: cleanup
