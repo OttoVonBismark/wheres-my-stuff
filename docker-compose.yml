@@ -22,7 +22,6 @@ services:
         volume:
           nocopy: true
 
-  # memcached
   postgres: &postgres
     image: postgres:13-alpine
     environment:
