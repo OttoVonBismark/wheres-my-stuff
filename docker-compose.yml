@@ -1,0 +1,66 @@
+version: '3.5'
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tmpfs:
+      - /app/tmp
+      - /app/log
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+      - type: volume
+        source: node_modules
+        target: /app/node_modules
+        volume:
+          nocopy: true
+      - type: volume
+        source: vendor_bundle
+        target: /app/vendor/bundle
+        volume:
+          nocopy: true
+
+  # memcached
+  postgres: &postgres
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_DB=wms
+      - POSTGRES_USER=wms_worker
+      - POSTGRES_PASSWORD=derpass
+    networks:
+      - wms-backend
+
+############################
+#         TESTING          #
+############################
+  test: &test
+    <<: *app
+    command: ["bundle", "exec", "rspec", "spec"]
+    networks:
+      - wms-exposed
+      - wms-backend
+    environment:
+      RAILS_ENV: test
+      NODE_ENV: test
+      DATABASE_URL: "postgresql://wms_worker:derpass@postgres-test/wms"
+    depends_on:
+      - postgres-test
+
+  postgres-test:
+    <<: *postgres
+    tmpfs: /var/lib/postgresql/data
+
+networks:
+  wms-exposed:
+    driver: bridge
+    name: wms-exposed
+  wms-backend:
+    driver: bridge
+    name: wms-backend
+    internal: true
+
+volumes:
+  node_modules:
+  vendor_bundle:
