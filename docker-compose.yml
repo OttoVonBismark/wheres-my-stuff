@@ -36,7 +36,7 @@ services:
 ############################
   test: &test
     <<: *app
-    command: ["bundle", "exec", "rspec", "spec"]
+    command: ["./bin/all_checks"]
     networks:
       - wms-exposed
       - wms-backend
