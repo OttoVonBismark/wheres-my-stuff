@@ -47,6 +47,14 @@ services:
     depends_on:
       - postgres-test
 
+  rubocop: &rubocop
+    <<: *test
+    command: ["bundle", "exec", "rubocop"]
+
+  rspec: &rspec
+    <<: *test
+    command: ["bundle", "exec", "rspec", "spec"]
+
   postgres-test:
     <<: *postgres
     tmpfs: /var/lib/postgresql/data
