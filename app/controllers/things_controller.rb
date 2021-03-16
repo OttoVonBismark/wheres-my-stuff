@@ -9,7 +9,7 @@ class ThingsController < ApplicationController
   def create
     thing = Thing.new(thing_params)
 
-    if thing.save
+    if thing.save!
       # flash[:info] = 'Thing saved successfully.'
       redirect_to things_url
     else
@@ -33,7 +33,7 @@ class ThingsController < ApplicationController
   def update
     thing = Thing.find(params[:id])
 
-    if thing.update
+    if thing.update!
       # flash[:info] = "Thing updated successfully!"
       redirect_to thing
     else
@@ -56,7 +56,8 @@ class ThingsController < ApplicationController
                             :shipped_on,
                             :tracking_number,
                             :due_on,
-                            :arrived_on
+                            :arrived_on,
+                            :price
                           )
   end
 end

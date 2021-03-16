@@ -7,6 +7,10 @@
   = f.text_area :description
   %br
 
+  = f.label :price, 'Price: '
+  = f.number_field :price, min: 0, step: 0.01
+  %br
+
   = f.label :ordered_on, 'Ordered on: '
   = f.date_select :ordered_on, required: true
   %br
