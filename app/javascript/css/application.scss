@@ -1,6 +1,6 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
-
-// Custom Shiz Goes Here
-
 @import "tailwindcss/utilities";
+
+@import "components/master";
+@import "components/button";
