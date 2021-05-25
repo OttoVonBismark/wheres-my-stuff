@@ -116,8 +116,6 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.4)
-    jbuilder (2.11.2)
-      activesupport (>= 5.0.0)
     kramdown (2.3.1)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -305,7 +303,6 @@ DEPENDENCIES
   faker
   fuubar
   haml-rails (~> 2.0)
-  jbuilder (~> 2.7)
   listen (~> 3.3)
   pg
   puma (~> 5.0)
