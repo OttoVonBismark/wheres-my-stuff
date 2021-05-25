@@ -13,13 +13,31 @@ $alabaster: #f4f3ee;
 $melon: #e0afa0;
 
 body {
-  // background-color: $alabaster;
-  // color: #131313;
+  width: 85%;
+  align-content: center;
   background-color: $dark-lava;
-  color: $pale-silver;  
+  color: $pale-silver;
+  margin: 0 auto;
 }
 
 header {
+  display: block;
   background-color: $pale-silver;
   color: $dark-lava;
+  font-size: 3rem;
+  padding-left: 1rem;
+  @apply font-bold
+}
+
+.container {
+  display: grid;
+  grid-template-areas: "navigation content sidebar";
+  grid-template-columns: [navigation] minmax(100px, 1fr) [content-zone] minmax(300px, 5fr) [right-sidebar] minmax(100px, 1fr);
+  max-width: inherit;
+  a {
+    color: $alabaster;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
