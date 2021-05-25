@@ -3,7 +3,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   purge: [],
   presets: [],
-  darkMode: 'media', // false, 'media' or 'class'. Only heathens set this to false. SCREW PERFORMANCE! I LIKE HAVING EYES!
+  // darkMode: 'class', // 'media' or 'class'.
   theme: {
     screens: {
       sm: '640px',

@@ -10,4 +10,11 @@
     = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    = render partial: 'layouts/header'
+    %div.container
+      %div.navzone
+        = render partial: 'layouts/navigation'
+      %div.content
+        = yield
+      %div.sidebar
+        = render partial: 'layouts/sidebar'

@@ -37,3 +37,6 @@ Style/RedundantFetchBlock:
 Layout/ExtraSpacing:
   Exclude:
     - 'config/routes.rb'
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always_true
