@@ -20,4 +20,10 @@ class User < ApplicationRecord
 
     allowed.include? permission
   end
+
+  def needs_confirmation?
+    return false if new_record?
+
+    pending_any_confirmation { true }
+  end
 end
