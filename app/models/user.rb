@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :trackable, :confirmable, :recoverable, :rememberable, :validatable
 
+  has_many :permissions, dependent: :destroy
+
   validates :username, presence: true, allow_blank: false
   validates :email, presence: true, allow_blank: false
 end
