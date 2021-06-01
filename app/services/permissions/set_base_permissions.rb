@@ -8,7 +8,7 @@ module Permissions
 
     def call(user:)
       result = Permission.transaction(requires_new: true) do
-        set_base_permissions(user)
+        apply_base_permissions(user)
       end
 
       response.success = true if result == :success
@@ -17,7 +17,7 @@ module Permissions
 
     private
 
-    def set_base_permissions(user)
+    def apply_base_permissions(user)
       # Clear the field
       user.permissions.each(&:destroy) if user.permissions.any?
 
