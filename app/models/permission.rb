@@ -7,7 +7,7 @@
 class Permission < ApplicationRecord
   belongs_to :user
 
-  validates :allowed, inclusion: { in: ->(_) { Permission.supported_permissions.map(&:to_sym) } }
+  validates :allowed, inclusion: { in: ->(_) { Permission.supported_permissions.map(&:to_s) } }
 
   class << self
     # A list of valid permissions.
