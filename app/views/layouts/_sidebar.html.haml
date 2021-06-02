@@ -1,1 +1,5 @@
-%p This is the right sidebar.
+- if user_signed_in?
+  %p= "Hello, #{current_user.username}!"
+  = link_to "Sign Out", destroy_user_session_path, method: 'DELETE'
+- else
+  = link_to "Sign In", new_user_session_path

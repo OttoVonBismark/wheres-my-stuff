@@ -2,6 +2,9 @@
 
 # ThingsController
 class ThingsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authorize_member!
+
   def new
     render locals: { thing: Thing.new }
   end

@@ -5,7 +5,7 @@ module Authorization
   # Helpers module
   module Helpers
     Permission.supported_permissions.each do |permission|
-      define_mehtod :"authorize_#{permission}!" do
+      define_method :"authorize_#{permission}!" do
         Authorization::AuthorizePolicy.authorize!(permission, current_user)
       end
     end
