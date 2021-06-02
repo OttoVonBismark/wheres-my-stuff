@@ -11,7 +11,7 @@ module Things
     # @param thing_params [ActionController::Parameters] The parameters for the new Thing.
     # @return [Response] Contains success/fail information as well as the new Thing in `data`.
     def call(thing_params:)
-      result = Thing.trasaction(requires_new: true) do
+      result = Thing.transaction(requires_new: true) do
         create_thing(thing_params)
       end
 
