@@ -1,4 +1,6 @@
 = form_with(model: thing, local: true) do |f|
+  = f.hidden_field :user_id, value: current_user.id
+
   = f.label :name, 'Package Name: '
   = f.text_field :name
   %br

@@ -26,7 +26,7 @@ class ThingsController < ApplicationController
   end
 
   def index
-    render locals: { things: Thing.all }
+    render locals: { things: current_user.things }
   end
 
   def edit
@@ -60,7 +60,8 @@ class ThingsController < ApplicationController
       :tracking_number,
       :due_on,
       :arrived_on,
-      :price
+      :price,
+      :user_id
     )
   end
 end
