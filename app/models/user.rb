@@ -7,6 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :trackable, :confirmable, :recoverable, :rememberable, :validatable
 
   has_many :permissions, dependent: :destroy, autosave: true
+  has_many :things, dependent: :destroy
 
   validates :username, presence: true, allow_blank: false
   validates :email, presence: true, allow_blank: false
