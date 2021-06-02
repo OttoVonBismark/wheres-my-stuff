@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe Permissions::SetBasePermissions do
   subject(:service) { described_class }
 
-  let!(:user) { create(:user, with_permissions: ['member', 'admin']) }
+  let!(:user) { create(:user, with_permissions: %w[member admin]) }
 
   context 'Calling the service' do
     it 'sets base permissions for a new user' do

@@ -27,7 +27,7 @@ RSpec.describe Things::CreateThing do
       it 'creates the Thing' do
         response = service.call(thing_params: thing_params)
         new_thing = response.data
-        
+
         expect(response.success?).to be true
         expect(new_thing).to_not be nil
         expect(Thing.find(new_thing.id)).to eq new_thing
