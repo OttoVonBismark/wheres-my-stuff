@@ -10,13 +10,13 @@ class ThingsController < ApplicationController
   end
 
   def create
-    thing = Thing.new(thing_params)
+    response = permit(Things::CreateThing).call(thing_params: thing_params)
 
-    if thing.save!
-      # flash[:info] = 'Thing saved successfully.'
+    if response.success?
+      flash[:info] = 'Thing saved successfully.'
       redirect_to things_url
     else
-      # flash[:warning] = "Shit's broke, yo!"
+      flash[:warning] = 'Unable to save Thing.'
       redirect_back(fallback_location: root_url)
     end
   end
@@ -37,7 +37,7 @@ class ThingsController < ApplicationController
     thing = Thing.find(params[:id])
 
     if thing.update!
-      # flash[:info] = "Thing updated successfully!"
+      flash[:info] = 'Thing updated successfully!'
       redirect_to thing
     else
       redirect_back(fallback_location: things_url)
