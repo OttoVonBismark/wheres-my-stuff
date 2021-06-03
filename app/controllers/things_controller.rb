@@ -2,18 +2,21 @@
 
 # ThingsController
 class ThingsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authorize_member!
+
   def new
     render locals: { thing: Thing.new }
   end
 
   def create
-    thing = Thing.new(thing_params)
+    response = permit(Things::CreateThing).call(thing_params: thing_params)
 
-    if thing.save!
-      # flash[:info] = 'Thing saved successfully.'
+    if response.success?
+      flash[:info] = 'Thing saved successfully.'
       redirect_to things_url
     else
-      # flash[:warning] = "Shit's broke, yo!"
+      flash[:warning] = 'Unable to save Thing.'
       redirect_back(fallback_location: root_url)
     end
   end
@@ -23,7 +26,7 @@ class ThingsController < ApplicationController
   end
 
   def index
-    render locals: { things: Thing.all }
+    render locals: { things: current_user.things }
   end
 
   def edit
@@ -34,7 +37,7 @@ class ThingsController < ApplicationController
     thing = Thing.find(params[:id])
 
     if thing.update!
-      # flash[:info] = "Thing updated successfully!"
+      flash[:info] = 'Thing updated successfully!'
       redirect_to thing
     else
       redirect_back(fallback_location: things_url)
@@ -57,7 +60,8 @@ class ThingsController < ApplicationController
       :tracking_number,
       :due_on,
       :arrived_on,
-      :price
+      :price,
+      :user_id
     )
   end
 end

@@ -3,10 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Thing, type: :model do
+  let!(:user) { create(:user) }
+
   let(:valid_attributes) {
     {
       name: 'Some Thing',
-      price: 1.00
+      price: 1.00,
+      user_id: user.id
     }
   }
 
@@ -18,7 +21,7 @@ RSpec.describe Thing, type: :model do
       end
 
       it 'creates a Thing with a price of zero' do
-        thing = Thing.new(name: 'Some thing', price: 0.00)
+        thing = Thing.new(name: 'Some thing', price: 0.00, user_id: user.id)
         expect(thing).to be_valid
       end
     end

@@ -1,5 +1,9 @@
-%h1.text-7xl This is a Line of Text
-%p Aren't you glad you came here?
-%p
-  You're probably looking for the
-  = link_to 'Things', things_url
+%h1.text-7xl Welcome to Where's My Stuff!
+%p Tired of forgetting what you ordered and when it's supposed to get here? Leave it to us!
+- unless user_signed_in?
+  %p
+    You are not signed in. You can 
+    = link_to "sign in here, ", new_user_session_path
+    or 
+    = link_to "create a new account ", new_user_registration_path
+    and start keeping track of what's coming your way today!

@@ -30,4 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  globals:
+    create:
+      errors: Failed to create %{object_name}
+      success: Successfully created %{object_name}
+    destroy:
+      errors: Failed to destroy %{object_name}
+      success: Successfully destroyed %{object_name}
+    update:
+      errors: Failed to update %{object_name}
+      success: Successfully updated %{object_name}

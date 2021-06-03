@@ -1,34 +1,33 @@
 = form_with(model: thing, local: true) do |f|
-  = f.label :name, 'Package Name: '
-  = f.text_field :name
-  %br
-  
-  = f.label :description, 'Description: '
-  = f.text_area :description
-  %br
+  = f.hidden_field :user_id, value: current_user.id
 
-  = f.label :price, 'Price: '
-  = f.number_field :price, min: 0, step: 0.01
-  %br
+  %div.form-grid
+    = f.label :name, 'Package Name'
+    = f.text_field :name, placeholder: 'Name', class: 'text-field'
+    
+    = f.label :description, 'Description'
+    = f.text_area :description, placeholder: 'Description', class: 'text-area'
 
-  = f.label :ordered_on, 'Ordered on: '
-  = f.date_select :ordered_on, required: true
-  %br
+    = f.label :tracking_number, 'Tracking number'
+    = f.text_field :tracking_number, placeholder: 'Tracking Number', class: 'text-field'
 
-  = f.label :shipped_on, 'Shipped on: '
-  = f.date_select :shipped_on
-  %br
+    = f.label :price, 'Price'
+    = f.number_field :price, min: 0, step: 0.01, class: 'text-field'
 
-  = f.label :tracking_number, 'Tracking number: '
-  = f.text_field :tracking_number
-  %br
+    = f.label :ordered_on, 'Ordered on'
+    %div.date-field
+      = f.date_select :ordered_on, required: true
 
-  = f.label :due_on, 'Package due on: '
-  = f.date_select :due_on
-  %br
-  
-  = f.label :arrived_on, 'Package arrived on: '
-  = f.date_select :arrived_on
-  %br
+    = f.label :shipped_on, 'Shipped on'
+    %div.date-field
+      = f.date_select :shipped_on, class: 'date-field'
+
+    = f.label :due_on, 'Package due on'
+    %div.date-field
+      = f.date_select :due_on, class: 'date-field'
+    
+    = f.label :arrived_on, 'Package arrived on'
+    %div.date-field
+      = f.date_select :arrived_on, class: 'date-field'
 
   = f.submit button_text, class: 'btn'

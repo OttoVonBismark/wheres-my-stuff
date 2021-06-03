@@ -31,8 +31,9 @@ header {
 
 .container {
   display: grid;
-  grid-template-areas: "navigation content sidebar";
+  grid-template-areas: 'navigation content sidebar';
   grid-template-columns: [navigation] minmax(100px, 1fr) [content-zone] minmax(300px, 5fr) [right-sidebar] minmax(100px, 1fr);
+  gap: 1rem;
   max-width: inherit;
   a {
     color: $alabaster;

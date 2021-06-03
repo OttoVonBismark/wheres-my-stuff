@@ -7,6 +7,15 @@ FactoryBot.define do
     password { 'foobarbaz' }
     password_confirmation { password }
     confirmed_at { DateTime.yesterday }
+    permissions do
+      Array(with_permissions).map do |permission|
+        association :permission, user: instance, allowed: permission.to_s
+      end
+    end
+
+    transient do
+      with_permissions { :member }
+    end
 
     trait :unconfirmed do
       confirmed_at { nil }

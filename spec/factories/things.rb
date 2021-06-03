@@ -3,5 +3,7 @@
 FactoryBot.define do
   factory :thing do
     name { Faker::Food.fruits }
+
+    user
   end
 end
