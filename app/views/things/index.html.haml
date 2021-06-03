@@ -1,11 +1,12 @@
-%h1 Here are the Things you've ordered.
-
-%p
-  Create some new
-  = link_to 'Things', new_thing_url
-
-- if things.count.zero?
-  %p There are no Things in the system... yet!
+- if things.size.zero?
+  %h1 
+    There's nothing to see here. You should
+    = link_to ' add some Things to track.', new_thing_url
 - else
-  - things.each do |t|
-    = render partial: 'thing', locals: { thing: t }
+  %h1 Here are the Things you've ordered.
+
+  %p
+    Create some new
+    = link_to 'Things', new_thing_url
+
+  = render partial: 'thing', locals: { things: things }
