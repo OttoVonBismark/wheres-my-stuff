@@ -9,6 +9,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "css/application"
 
+require('controllers')
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
