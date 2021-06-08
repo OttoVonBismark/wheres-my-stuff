@@ -1,33 +1,49 @@
-= form_with(model: thing, local: true) do |f|
-  = f.hidden_field :user_id, value: current_user.id
+%div{ data: { controller: 'thing' } }
+  = form_with(model: thing, local: true) do |f|
+    = f.hidden_field :user_id, value: current_user.id
 
-  %div.form-grid
-    = f.label :name, 'Package Name'
-    = f.text_field :name, placeholder: 'Name', class: 'text-field'
-    
-    = f.label :description, 'Description'
-    = f.text_area :description, placeholder: 'Description', class: 'text-area'
+    %div.form-grid
+      = f.label :name, 'Package Name'
+      = f.text_field :name, placeholder: 'Name', class: 'text-field'
+      
+      = f.label :description, 'Description'
+      = f.text_area :description, placeholder: 'Description', class: 'text-area'
 
-    = f.label :tracking_number, 'Tracking number'
-    = f.text_field :tracking_number, placeholder: 'Tracking Number', class: 'text-field'
+      = f.label :tracking_number, 'Tracking number'
+      = f.text_field :tracking_number, placeholder: 'Tracking Number', class: 'text-field'
 
-    = f.label :price, 'Price'
-    = f.number_field :price, min: 0, step: 0.01, class: 'text-field'
+      = f.label :price, 'Price'
+      = f.number_field :price, min: 0, step: 0.01, class: 'text-field'
 
-    = f.label :ordered_on, 'Ordered on'
-    %div.date-field
-      = f.date_select :ordered_on, required: true
+      = f.label :ordered_on, 'Ordered on'
+      %div.date-field
+        = f.date_select :ordered_on, required: true
 
-    = f.label :shipped_on, 'Shipped on'
-    %div.date-field
-      = f.date_select :shipped_on, class: 'date-field'
+      = f.label :has_shipped, 'Has this item shipped?'
+      = f.check_box :has_shipped, data: { action: 'thing#toggle_shipped' }
 
-    = f.label :due_on, 'Package due on'
-    %div.date-field
-      = f.date_select :due_on, class: 'date-field'
-    
-    = f.label :arrived_on, 'Package arrived on'
-    %div.date-field
-      = f.date_select :arrived_on, class: 'date-field'
+      %div{ data: { thing: { target: 'hasShippedLabel' } } }
+        = f.label :shipped_on, 'Shipped on'
+      %div{ data: { thing: { target: 'hasShippedField' } } }
+        %div.date-field
+          = f.date_select :shipped_on, include_blank: true, class: 'date-field'
 
-  = f.submit button_text, class: 'btn'
+      = f.label :has_due_date, 'Does this item have an expected due date?'
+      = f.check_box :has_due_date, data: { action: 'thing#toggle_due' }
+
+      %div{ data: { thing: { target: 'hasDueDateLabel' } } }
+        = f.label :due_on, 'Package due on'
+      %div{ data: { thing: { target: 'hasDueDateField' } } }
+        %div.date-field
+          = f.date_select :due_on, include_blank: true, class: 'date-field'
+
+      = f.label :has_arrived, 'Has this item arrived?'
+      = f.check_box :has_arrived, data: { action: 'thing#toggle_arrived' }
+
+      %div{ data: { thing: { target: 'hasArrivedLabel' } } }
+        = f.label :arrived_on, 'Package arrived on'
+      %div{ data: { thing: { target: 'hasArrivedField' } } }
+        %div.date-field
+          = f.date_select :arrived_on, include_blank: true, class: 'date-field'
+
+    = f.submit button_text, class: 'btn'

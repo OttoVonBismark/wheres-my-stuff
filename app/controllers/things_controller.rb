@@ -51,6 +51,8 @@ class ThingsController < ApplicationController
 
   private
 
+  # We're leaving out has_shipped has_due_date and has_arrived because those are for stimulus and have no model refs.
+  # You'll see those get rejected when POSTing from the form.
   def thing_params
     params.require(:thing).permit(
       :name,
