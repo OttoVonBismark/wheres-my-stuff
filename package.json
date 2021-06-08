@@ -9,6 +9,7 @@
     "autoprefixer": "^9",
     "autosize": "^4.0.2",
     "postcss": "^7",
+    "stimulus": "^2.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "turbolinks": "^5.2.0"
   },
