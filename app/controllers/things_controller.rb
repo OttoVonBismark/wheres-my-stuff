@@ -26,7 +26,13 @@ class ThingsController < ApplicationController
   end
 
   def index
-    render locals: { things: current_user.things }
+    render locals: {
+      things: current_user.things,
+      things_due_this_week: current_user.things.due_this_week,
+      things_due_this_month: current_user.things.due_this_month,
+      things_arrived_this_week: current_user.things.arrived_this_week,
+      things_arrived_this_month: current_user.things.arrived_this_month
+    }
   end
 
   def edit
