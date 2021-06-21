@@ -12,7 +12,7 @@ class AdminsController < ApplicationController
   def users_show
     render locals: { user: User.find(params[:id]) }
   end
-  
+
   def things_index
     render locals: {
       things: Thing.all,
