@@ -12,6 +12,6 @@
 %h3.text-2xl.font-bold.mt-4 Actions
 %p= link_to "Edit user profile.", "#"
 - if user.banned_on.nil?
-  %p= link_to "Ban this user.", "#"
+  %p= link_to "Ban this user.", ban_user_path(user.id), method: :post
 - else
-  %p= link_to "Unban this user.", "#"
+  %p= link_to "Unban this user.", unban_user_path(user.id), method: :post

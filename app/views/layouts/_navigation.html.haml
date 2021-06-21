@@ -1,5 +1,5 @@
 %navigation
   %p= link_to "My Things", things_path
-  - if current_user.check_permissions?(:admin)
+  - if user_signed_in? && current_user.check_permissions?(:admin)
     %p= link_to "Users Index", admin_users_path
     %p= link_to "Global Things", admin_things_path

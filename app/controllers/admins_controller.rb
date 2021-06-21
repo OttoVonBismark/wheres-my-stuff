@@ -13,6 +13,30 @@ class AdminsController < ApplicationController
     render locals: { user: User.find(params[:id]) }
   end
 
+  def ban_user
+    user = User.find(params[:id])
+    response = permit(Admins::BanUser).call(user: user)
+
+    if response.success?
+      flash[:notice] = "#{user.username} has been banned."
+    else
+      flash[:alert] = "Unable to ban #{user.username}. Please check the error log."
+    end
+    redirect_back(fallback_location: admin_users_path)
+  end
+
+  def unban_user
+    user = User.find(params[:id])
+    response = permit(Admins::UnbanUser).call(user: user)
+
+    if response.success?
+      flash[:notice] = "#{user.username} has been unbanned."
+    else
+      flash[:alert] = "Unable to unban #{user.username}. Please check the error log."
+    end
+    redirect_back(fallback_location: admin_users_path)
+  end
+
   def things_index
     render locals: {
       things: Thing.all,
