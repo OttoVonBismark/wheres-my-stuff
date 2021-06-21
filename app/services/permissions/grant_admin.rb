@@ -26,7 +26,7 @@ module Permissions
       # If the user is already an admin, do nothing.
       if user.check_permissions?(:admin)
         # Response messages are an array, so we wrap this note in a single-element array.
-        message = ["#{user.username} already has administrative priviledges. Nothing to do."]
+        message = ["#{user.username} already has administrative privileges. Nothing to do."]
         response.messages.concat(message)
         :errors
       else

@@ -24,5 +24,9 @@ FactoryBot.define do
     trait :without_password do
       password { nil }
     end
+
+    trait :banned do
+      banned_on { DateTime.now }
+    end
   end
 end
