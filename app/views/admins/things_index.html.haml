@@ -1,0 +1,21 @@
+- if things.size.zero?
+  %h1 There's nothing to see here.
+- else
+  - unless things_due_this_week.size.zero?
+    %h1.text-3xl.font-bold.mt-2 Things due this Week
+    = render partial: 'thing', locals: { things: things_due_this_week }
+
+  - unless things_due_this_month.size.zero?
+    %h1.text-3xl.font-bold.mt-2 Things due this Month
+    = render partial: 'thing', locals: { things: things_due_this_month }
+
+  - unless things_arrived_this_week.size.zero?
+    %h1.text-3xl.font-bold.mt-2 Things arrived this Week
+    = render partial: 'thing', locals: { things: things_arrived_this_week }
+
+  - unless things_arrived_this_month.size.zero?
+    %h1.text-3xl.font-bold.mt-2 Things arrived this Month
+    = render partial: 'thing', locals: { things: things_arrived_this_month }
+
+  %h1.text-3xl.font-bold.mt-2 All the Things
+  = render partial: 'thing', locals: { things: things }
