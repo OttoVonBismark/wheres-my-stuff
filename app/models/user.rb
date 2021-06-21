@@ -27,4 +27,19 @@ class User < ApplicationRecord
 
     pending_any_confirmation { true }
   end
+
+  def ban!
+    self.banned_on = DateTime.now
+    save!
+  end
+
+  def unban!
+    self.banned_on = nil
+    save!
+  end
+
+  # Banned users cannot log in.
+  def active_for_authentication?
+    super && !banned_on
+  end
 end

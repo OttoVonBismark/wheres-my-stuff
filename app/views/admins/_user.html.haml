@@ -1,0 +1,22 @@
+%table.index-table.mt-4
+  %tr
+    %th Username
+    %th Email
+    %th Sign In Count
+    %th Last Sign In At
+    %th Current Sign In At
+    %th Banned On
+    %th Admin?
+  - users.each do |user|
+    %tr
+      %td= link_to user.username, admin_user_path(user.id)
+      %td= user.email
+      %td= user.sign_in_count
+      %td= user.last_sign_in_at
+      %td= user.current_sign_in_at
+      %td= user.banned_on
+      - if user.check_permissions?(:admin)
+        %td True
+      - else
+        %td False
+

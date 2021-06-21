@@ -1,0 +1,22 @@
+%table.index-table.mt-4
+  %tr
+    %th User
+    %th Name
+    %th Description
+    %th Ordered On
+    %th Shipped On
+    %th Tracking Number
+    %th Due On
+    %th Arrived On
+    %th Price
+  - things.each do |thing|
+    %tr
+      %td= thing.user.username
+      %td= link_to thing.name, thing_path(thing.id)
+      %td= thing.description
+      %td= thing.ordered_on
+      %td= thing.shipped_on
+      %td= thing.tracking_number
+      %td= thing.due_on
+      %td= thing.arrived_on
+      %td= thing.price

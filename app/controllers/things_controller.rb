@@ -4,6 +4,10 @@
 class ThingsController < ApplicationController
   before_action :authenticate_user!
   before_action :authorize_member!
+  before_action except: %i[new create index] do
+    thing = Thing.find(params[:id])
+    assert_ownership(thing)
+  end
 
   def new
     render locals: { thing: Thing.new }
@@ -71,5 +75,11 @@ class ThingsController < ApplicationController
       :price,
       :user_id
     )
+  end
+
+  def assert_ownership(thing)
+    return if thing.user_id == current_user.id || current_user.check_permissions?(:admin)
+
+    raise Authorization::NotAuthorizedError
   end
 end

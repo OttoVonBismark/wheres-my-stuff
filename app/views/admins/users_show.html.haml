@@ -1,0 +1,17 @@
+%h1.text-3xl.font-bold= "#{user.username}'s Profile"
+%p= "Email: #{user.email}"
+%p= "Sign in count: #{user.sign_in_count}"
+%p= "Current sign in at: #{user.current_sign_in_at}"
+%p= "Current sign in IP: #{user.current_sign_in_ip}"
+%p= "Last sign in at: #{user.last_sign_in_at}"
+%p= "Last sign in IP: #{user.last_sign_in_ip}"
+%p= "Email confirmed at: #{user.confirmed_at}"
+%p= "Registered since: #{user.created_at}"
+%p= "Banned on: #{user.banned_on}"
+
+%h3.text-2xl.font-bold.mt-4 Actions
+%p= link_to "Edit user profile.", "#"
+- if user.banned_on.nil?
+  %p= link_to "Ban this user.", ban_user_path(user.id), method: :post
+- else
+  %p= link_to "Unban this user.", unban_user_path(user.id), method: :post
