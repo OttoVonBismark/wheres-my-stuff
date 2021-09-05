@@ -1,3 +1,4 @@
 %h1= thing.name
 %p= "Ordered on: #{ thing.ordered_on }"
 %p= "Price: #{ thing.price }"
+= link_to "Edit this Thing", edit_thing_path(thing.id)
