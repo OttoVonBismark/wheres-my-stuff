@@ -46,7 +46,7 @@ class ThingsController < ApplicationController
   def update
     thing = Thing.find(params[:id])
 
-    if thing.update!
+    if thing.update!(thing_params)
       flash[:info] = 'Thing updated successfully!'
       redirect_to thing
     else
