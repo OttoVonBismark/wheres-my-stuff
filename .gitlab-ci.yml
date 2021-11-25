@@ -10,7 +10,10 @@ variables:
 build:
   stage: build
   script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker-compose build
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
 
 rubocop:
   stage: tests
