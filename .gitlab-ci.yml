@@ -1,16 +1,35 @@
 stages:
   - build
   - tests
+  - push
   - cleanup
 
 variables:
-  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
 
 build:
   stage: build
   script:
-    - docker-compose build
+    # Pull the latest image if it exists, otherwise continue.
+    - docker pull $CONTAINER_RELEASE_IMAGE || true
+
+    - >
+      docker build
+      --pull
+      --cache-from $CONTAINER_RELEASE_IMAGE
+      --label "org.opencontainers.image.title=$CI_PROJECT_TITLE"
+      --label "org.opencontainers.image.url=$CI_PROJECT_URL"
+      --label "org.opencontainers.image.created=$CI_JOB_STARTED_AT"
+      --label "org.opencontainers.image.revision=$CI_COMMIT_SHA"
+      --label "org.opencontainers.image.version=$CI_COMMIT_REF_NAME"
+      --tag $CONTAINER_TEST_IMAGE
+      .
+    
+    - docker push $CONTAINER_TEST_IMAGE
 
 rubocop:
   stage: tests
@@ -22,7 +41,32 @@ rspec:
   script:
     - docker-compose run rspec
 
+push_latest:
+  stage: push
+  variables:
+    GIT_STRATEGY: none # We don't need source code here.
+  only:
+    - main
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+
+# This might not actually do anything, but it's best practices, sooooo
+push_tags:
+  stage: push
+  variables:
+    GIT_STRATEGY: none
+  only:
+    - tags
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+
 cleanup:
   stage: cleanup
+  variables:
+    GIT_STRATEGY: none
   script:
     - docker system prune -af && docker volume prune -f
