@@ -14,7 +14,6 @@ before_script:
 build:
   stage: build
   script:
-    # - docker-compose build
     # Pull the latest image if it exists, otherwise continue.
     - docker pull $CONTAINER_RELEASE_IMAGE || true
 
@@ -30,7 +29,6 @@ build:
       --tag $CONTAINER_TEST_IMAGE
       .
     
-    # - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
 rubocop:
