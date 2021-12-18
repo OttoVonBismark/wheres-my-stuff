@@ -43,7 +43,12 @@ services:
     environment:
       RAILS_ENV: test
       NODE_ENV: test
-      DATABASE_URL: "postgresql://wms_worker:derpass@postgres-test/wms"
+      WMS_HOST: postgres-test
+      WMS_USER: wms_worker
+      WMS_PASS: derpass
+      WMS_TEST_DB: wms
+      WMS_DEV_DB: wms
+      WMS_PROD_DB: wms
     depends_on:
       - postgres-test
 

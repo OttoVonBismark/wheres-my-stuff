@@ -1,4 +1,4 @@
-// Styles specifically for forms.
+/* Styles specifically for forms. */
 label {
   margin-right: .5rem;
   @apply font-bold
@@ -18,41 +18,41 @@ label {
 }
 
 .text-field {
-  background-color: $pale-silver;
+  background-color: var(--pale-silver);
   border: none;
   border-radius: .25rem;
-  color: $dark-lava;
+  color: var(--dark-lava);
   margin-top: .25rem;
   margin-bottom: .25rem;
   padding: .25rem;
   @apply shadow;
+}
 
-  &::placeholder {
-    color: $mid-gray;
-  }
+.text-field::placeholder {
+  color: var(--mid-gray);
+}
 
-  &:focus {
-    background-color: $alabaster;
-  }
+.text-field:focus {
+  background-color: var(--alabaster);
 }
 
 .text-area {
-  background-color: $pale-silver;
+  background-color: var(--pale-silver);
   border: none;
   border-radius: .25rem;
-  color: $dark-lava;
+  color: var(--dark-lava);
   margin-top: .25rem;
   margin-bottom: .25rem;
   padding: .25rem;
   @apply shadow;
+}
 
-  &::placeholder {
-    color: $mid-gray;
-  }
+.text-area::placeholder {
+    color: var(--mid-gray);
+}
 
-  &:focus {
-    background-color: $alabaster;
-  }
+.text-area:focus {
+  background-color: var(--alabaster);
 }
 
 .date-field {
@@ -60,7 +60,7 @@ label {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: stretch;
-  color: $dark-lava;
+  color: var(--dark-lava);
   margin-top: .25rem;
   margin-bottom: .25rem;
   padding: .25rem;
