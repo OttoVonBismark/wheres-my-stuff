@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  encoding: unicode
+  host: <%= ENV.fetch("WMS_HOST") %>
+  port: <%= ENV.fetch("WMS_PORT") { 5432 } %>
+  username: <%= ENV.fetch("WMS_USER") %>
+  password: <%= ENV.fetch("WMS_PASS") %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("WMS_DEV_DB") %>
+
+test:
+  <<: *default
+  database: <%= ENV.fetch("WMS_TEST_DB") %>
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("WMS_PROD_DB") %>

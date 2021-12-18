@@ -1,0 +1,29 @@
+/* Holds styling information for tables and other things index pages will use frequently. */
+
+.index-table {
+  border: solid 4px;
+}
+
+.index-table th {
+  border: solid 2px;
+  color: var(--dark-lava);
+  background-color: var(--mid-gray);
+}
+
+.index-table tr:nth-child(even) {
+  background-color: var(--alabaster);
+}
+
+.index-table tr:nth-child(odd) {
+  background-color: var(--pale-silver);
+}
+
+.index-table td {
+  border: solid 1px;
+  color: var(--dark-lava);
+}
+
+.index-table td a {
+  color: var(--dark-lava);
+  @apply font-bold
+}
